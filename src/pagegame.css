@@ -1,0 +1,490 @@
+/* Background tetap pakai #background dari index.css */
+
+/* HOME BUTTON (sama seperti close button di GameCanvas.css) */
+#home-button {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  z-index: 11;
+  transition: filter 0.3s, transform 0.3s;
+}
+
+#home-button:hover {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+/* MENU BUTTON animasi hover membesar */
+#menu-button,
+.menu-anim {
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1), filter 0.3s;
+}
+
+#menu-button:hover,
+.menu-anim:hover {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+/* Menu stylis container */
+.menu-stylis {
+  position: absolute;
+  top: 120px; /* tepat di bawah menu button */
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.menu-stylis .menu-item {
+  opacity: 0;
+  transform: translateY(-10px) scale(0.9);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: auto;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+.menu-open .menu-stylis .menu-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+#sound-toggle,
+#achievement-button {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+/* Animasi klik */
+.click-animate {
+  animation: click-scale 0.3s ease-in-out;
+}
+
+@keyframes click-scale {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+/* JUDUL DI ATAS */
+.judul-game-atas {
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  z-index: 16;
+  text-shadow: 2px 2px 8px #fffbe9, 0 2px 8px #b8860b44;
+}
+
+/* HAPUS PANEL UTAMA */
+/* .panel-game { ... } dihapus */
+
+/* PANEL ANAK (SUB PANEL) - sekarang panel utama */
+.sub-panel {
+  background: none !important; /* Hilangkan background lama */
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  padding: 32px 40px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 260px;
+  min-height: 340px; /* lebih tinggi dari sebelumnya */
+  position: relative;
+}
+
+/* Panel aktif: border hijau */
+.sub-panel.active-panel {
+  border: 4px solid #22c55e;
+  box-shadow: 0 0 0 4px #bbf7d0, 0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* Panel disabled: opacity lebih redup */
+.sub-panel:has(button:disabled) {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Jika ingin dua panel berdampingan, gunakan flex di parent */
+.panel-game-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  width: 100vw;
+  position: absolute;
+  top: 18%;
+  left: 0;
+  z-index: 20;
+}
+
+.panel-game-row-manual {
+  position: relative;
+  width: 100vw;
+  left: 3%;
+  height: 100vh;
+}
+
+/* Panel kiri dan kanan, posisi manual */
+.manual-puzzle {
+  position: absolute;
+  top: 210px;   /* Ubah sesuai kebutuhan */
+  left: 300px;  /* Geser ke kanan */
+}
+
+/* --- UBAH POSISI PAPAN DRAG N DROP DI SINI --- */
+.manual-dragndrop {
+  position: absolute;
+  top: -250px;   /* Ubah nilai top untuk vertikal */
+  left: 650px;  /* Ubah nilai left untuk horizontal */
+}
+/* --------------------------------------------- */
+
+/* ...panel-btn dan animasi tetap... */
+.panel-btn {
+  background: none;
+  border: none; /* pastikan tidak ada border */
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1), filter 0.3s;
+  padding: 0;
+  border-radius: 18px;
+  align-self: center;
+  margin-bottom: 8px;      /* Lebih dekat ke level */
+  margin-top: 24px;        /* Lebih atas dari sebelumnya */
+  transform-origin: center center; /* Tambahkan baris ini */
+  /* Pastikan tidak ada transform di sini! */
+  z-index: 2;
+}
+
+.panel-btn:hover,
+.panel-btn:focus {
+  transform: scale(1.15);
+  z-index: 21;
+  animation: none;
+}
+
+.panel-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* Hilangkan border hitam pada button saat focus/active */
+.panel-btn:focus,
+.panel-btn:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+/* Button disabled: tetap bisa klik dua kali panel lain */
+.panel-btn:disabled {
+  pointer-events: none;
+  filter: grayscale(1) brightness(0.8);
+}
+
+/* Animasi klik tetap */
+.click-animate {
+  animation: click-scale 0.3s ease-in-out;
+}
+
+@keyframes click-scale {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+@keyframes pulse-scale {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.13);}
+  100% { transform: scale(1);}
+}
+
+.papan-game-container {
+  position: absolute;
+  width: 320px;
+  /* min-height dihilangkan, height otomatis */
+  background: none;
+  /* posisi manual tetap */
+}
+
+.papan-inner {
+  position: relative;
+  width: 100%;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Gambar papan sebagai background, konten lain di atasnya */
+.papan-game-img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  max-width: 320px;
+  object-fit: cover;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  position: absolute;
+  top: 0; 
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Konten di atas papan */
+.papan-inner > .panel-btn,
+.papan-inner > .level-grid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Button di atas papan */
+.panel-btn {
+  margin-top: 24px;        /* Lebih atas dari sebelumnya */
+  margin-bottom: 8px;      /* Lebih dekat ke level */
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1), filter 0.3s;
+  border-radius: 18px;
+  transform-origin: center center;
+  z-index: 2;
+}
+
+
+/* Level grid di bawah button, tetap di atas papan */
+.level-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+  gap: 4px 4px;           /* Lebih rapat antar kolom dan baris */
+  padding: 8px 24px 0 24px;
+  justify-items: center;
+  margin-top: 0;
+  box-sizing: border-box;
+  z-index: 2;
+  position: relative;
+  grid-auto-rows: minmax(80px, auto);
+}
+
+/* Agar papan menyesuaikan tinggi isi */
+.papan-inner {
+  min-height: 340px;
+  height: auto;
+  padding-bottom: 24px;
+}
+
+/* Panel disabled */
+.papan-game-container.disabled-panel {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(1) brightness(0.8);
+}
+
+.level-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+  gap: 4px 2px;           /* Lebih rapat antar kolom dan baris */
+  padding: 8px 24px 0 24px;
+  justify-items: center;
+  margin-top: 0;
+  box-sizing: border-box;
+  z-index: 2;
+  position: relative;
+  grid-auto-rows: minmax(80px, auto);
+}
+
+.level-btn {
+  width: 100px;
+  height: 80px;
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: 2.5px solid #b8860b;
+  background: #fffbe9;
+  color: #b8860b;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px #0001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.level-btn:hover:not(:disabled),
+.level-btn:focus:not(:disabled) {
+  transform: scale(1.12);
+  background: #ffe066;
+  color: #222;
+}
+.level-btn:disabled {
+  opacity: 1;
+  pointer-events: none;
+  background: #e0e0e0;      /* abu-abu muda */
+  color: #888888;           /* teks abu-abu */
+  border-color: #bbbbbb;    /* border abu-abu */
+}
+
+.level-btn:disabled .level-img {
+  filter: grayscale(1) brightness(1.2);
+  opacity: 0.7;
+}
+
+.level-img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* Level 5 di tengah grid baris ke-3 */
+.level-btn-center {
+  grid-column: 1 / 3 !important;
+  justify-self: center;
+}
+
+.lock-overlay {
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 4px #0005);
+}
+.lock-panel {
+  opacity: 0.92;
+  filter: drop-shadow(0 2px 8px #0007);
+}
+
+/* Congratulation Modal (fall animation + gold border) */
+.popup-modal-overlay.congrats-fall-anim {
+  animation: fall-bg 0.7s cubic-bezier(.4,2,.6,1);
+}
+@keyframes fall-bg {
+  0% { opacity: 0; transform: translateY(0px);}
+  100% { opacity: 1; transform: translateY(0);}
+}
+
+.popup-modal.congrats-modal {
+  border: 8px solid #ffd700;
+  /* Hapus animasi popup-bounce agar tidak maju ke depan */
+  /* animation: popup-border-anim-gold 2.5s linear infinite; */
+  box-shadow: 0 0 32px #ffd70088, 0 2px 16px #0002;
+}
+@keyframes popup-border-anim-gold {
+  0%   { border-color: #ffd700; }
+  25%  { border-color: #fffbe9; }
+  50%  { border-color: #ffec80; }
+  75%  { border-color: #fffbe9; }
+  100% { border-color: #ffd700; }
+}
+.popup-title.congrats-title {
+  color: #b8860b;
+  font-size: 2.7rem;
+  text-shadow: 0 2px 8px #fffbe9, 0 2px 8px #b8860b44;
+}
+.popup-message.congrats-message {
+  color: #b8860b;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.popup-btn.popup-btn-trophy {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 132px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.popup-btn-trophy:hover {
+  transform: scale(1.07);
+}
+.popup-btn-trophy-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #fffbe9;
+  box-shadow: 0 2px 16px #ffd70088;
+  border: 4px solid #ffd700;
+  padding: 10px;
+  animation: trophy-pop 0.7s;
+}
+@keyframes trophy-pop {
+  0% { transform: scale(0.2) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(8deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Fall animation container and items */
+.fall-container {
+  pointer-events: none;
+  position: fixed;
+  z-index: 1002;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  overflow: hidden;
+}
+.fall-item {
+  position: absolute;
+  top: -40px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  opacity: 0.85;
+  animation: fall-down 1.8s cubic-bezier(.4,2,.6,1) forwards;
+}
+.fall-item-0 { background: #FFD700; }
+.fall-item-1 { background: #FF69B4; }
+.fall-item-2 { background: #00CFFF; }
+.fall-item-3 { background: #FFB347; }
+.fall-item-4 { background: #B8860B; }
+.fall-item-5 { background: #fffbe9; }
+
+@keyframes fall-down {
+  0% { transform: translateY(0) scale(1) rotate(0deg);}
+  80% { opacity: 0.85; }
+  100% { transform: translateY(100vh) scale(0.7) rotate(360deg); opacity: 0.2;}
+}

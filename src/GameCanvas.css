@@ -1,0 +1,248 @@
+#logo {
+  position: absolute;
+  top: 1%;
+  left: 40%;
+  transform: translateX(-50%);
+  width: 370px;
+  height: auto;
+  transition: filter 0.3s ease;
+  animation: pulse 2s infinite;
+  transform-origin: center;
+}
+
+/* Hapus animasi pulse/klik pada play & bermain */
+#play-button,
+#bermain-button {
+  transition: transform 0.1s cubic-bezier(.4,2,.6,1), filter 0.3s;
+  animation: none !important;
+}
+
+#play-button {
+  position: absolute;
+  top: 56%;
+  left: calc(21% + 170px);
+  width: 160px;
+  height: 160px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#bermain-button {
+  position: absolute;
+  top: 55%;
+  left: calc(40% + 170px);
+  width: 175px;
+  height: 175px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Membesar saat hover */
+#play-button:hover,
+#bermain-button:hover {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+/* Animasi tombol lain tetap */
+#sound-toggle,
+#achievement-button,
+#menu-button,
+#sound-button,
+#close-button {
+  transition: filter 0.3s ease;
+}
+
+#sound-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 90px;
+  height: auto;
+  cursor: pointer;
+}
+
+#close-button {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#menu-button {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: 120px;
+  height: 120px;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#sound-toggle{
+  position: absolute;
+  top: 80%;
+  /* Atur jarak horizontal dari kanan */
+  right: 30%; /* sound-toggle di kanan menu */
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 11;
+  opacity: 0;
+  transition: right 0.1s, opacity 0.3s;
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+#sound-toggle {
+  top: 1px;
+}
+
+.menu-open #sound-toggle,
+.menu-open #achievement-button {
+  opacity: 1;
+  transform: translateX(0%) translateY(0);
+}
+
+/* Menu stylis container */
+.menu-stylis {
+  position: absolute;
+  top: 1px;
+  right: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.menu-stylis .menu-item {
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.9);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: auto;
+}
+
+.menu-open .menu-stylis .menu-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+#maskot {
+  position: absolute;
+  bottom: 100px;
+  left: calc(50% - 45%);
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  transform: scaleX(-1);
+  z-index: 10;
+}
+
+#message-box {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 150px;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+  overflow: hidden;
+}
+
+#dialogue-container {
+  flex: 1;
+}
+
+#skip-text {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 18px;
+  color: #fff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);}
+  50% { transform: scale(1.12);}
+}
+
+#logo.animate,
+#sound-toggle.animate,
+#achievement-button.animate,
+#sound-button.animate,
+#close-button.animate {
+  animation: pulse 2s infinite;
+  transform-origin: center;
+}
+
+/* Hapus animasi pulse/click pada play & bermain */
+#play-button.animate,
+#play-button.click-animate,
+#bermain-button.animate,
+#bermain-button.click-animate {
+  animation: none !important;
+}
+
+.hover-animate {
+  transform: scale(1.2);
+  transition: transform 0.3s ease;
+}
+
+.rotate-in {
+  animation: rotate-in 0.5s ease-out forwards;
+}
+
+@keyframes rotate-in {
+  0% {
+    transform: translateY(50px) rotate(-360deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.click-animate {
+  animation: click-scale 0.3s ease-in-out;
+}
+
+@keyframes click-scale {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.shadow-animate {
+  box-shadow: 0 0 40px 10px white;
+  transition: box-shadow 0.3s, transform 0.3s;
+  transform: translateY(-8px) scale(1.05);
+}
+
+.blurred {
+  filter: blur(3px) brightness(0.7);
+  pointer-events: none;
+}

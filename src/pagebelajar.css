@@ -1,0 +1,214 @@
+/* Background tetap pakai #background dari index.css */
+
+/* HOME BUTTON (sama seperti close button di GameCanvas.css) */
+#home-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  z-index: 11;
+  transition: filter 0.3s, transform 0.3s;
+}
+
+#home-button:hover {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+/* MENU BUTTON animasi hover membesar */
+#menu-button,
+.menu-anim {
+  transition: transform 0.3s cubic-bezier(.4,2,.6,1), filter 0.3s;
+}
+
+#menu-button:hover,
+.menu-anim:hover {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+/* Menu stylis container khusus GamePage */
+.menu-stylis {
+  position: absolute;
+  top: 120px; /* tepat di bawah menu button */
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.menu-stylis .menu-item {
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.9);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: auto;
+}
+
+.menu-open .menu-stylis .menu-item {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+#sound-toggle,
+#achievement-button {
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: block;
+}
+
+/* Animasi klik */
+.click-animate {
+  animation: click-scale 0.3s ease-in-out;
+}
+
+@keyframes click-scale {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+
+/* JUDUL DI ATAS PAPAN */
+.judul-belajar-atas {
+  position: absolute;
+  top: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #b8860b;
+  text-align: center;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  z-index: 16;
+  text-shadow: 2px 2px 8px #fffbe9, 0 2px 8px #b8860b44;
+}
+
+/* PAPAN IMAGE DI TENGAH - LEBIH BESAR */
+.papan-belajar-img {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 95vw;
+  height: auto;
+  z-index: 15;
+  pointer-events: none;
+}
+
+/* Hapus .papan-belajar dan .judul-belajar jika tidak dipakai lagi */
+
+/* ID Card Container di kanan atas */
+.idcard-container {
+  position: absolute;      /* Agar bisa diposisikan bebas */
+  top: 125px;               /* Jarak dari atas */
+  right: 87%;             /* Jarak dari kanan */
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  z-index: 100;            /* Pastikan di atas elemen lain */
+  /* min-height: 60vh;     -- Hapus agar tidak mengganggu posisi */
+}
+
+/* ID Card Style (tetap kecil dan rapi) */
+.idcard {
+  background: linear-gradient(135deg, #f8fafc 70%, #e0e7ef 100%);
+  border-radius: 18px;
+  box-shadow: 0 6px 24px #0002;
+  padding: 18px 12px 22px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 140px;
+  min-height: 200px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: rgba(246, 246, 246, 0.5);
+}
+
+.idcard:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 32px #0003;
+}
+
+.idcard.empty {
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  pointer-events: none;
+}
+
+/* Foto di dalam ID Card */
+.idcard-foto {
+  width: 90px;
+  height: 70px;
+  border: 3px solid #222;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px #0001;
+}
+
+/* Gambar di dalam ID Card */
+.idcard-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Label di bawah foto */
+.idcard-label {
+  border: 2px solid #222;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: rgba(246, 246, 246, 0.5); /* 50% opacity */
+  color: #222;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  text-align: center;
+  min-width: 40px;
+  box-shadow: 0 1px 6px #0001;
+  transition: background 0.2s, color 0.2s;
+}
+
+.idcard:hover .idcard-label {
+  background: #222;
+  color: #fff;
+}
+
+/* 
+Keterangan:
+- .idcard-container: posisinya absolute di kanan atas, mudah diedit (ubah top/right sesuai kebutuhan).
+- .idcard: ukuran kecil, rapi, dan responsif.
+- .idcard-label: background transparan 50%.
+*/
+
+.idcard-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px 12px;
+  position: absolute;
+  top: 125px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 90vw;
+  max-width: 900px;
+  justify-items: center;
+}
